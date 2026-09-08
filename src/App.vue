@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
+import TodoItem from "./components/TodoItem.vue";
 
 const todos = ref([
   { id: 1, text: "Learn about ref and reactive state", done: true },
@@ -51,17 +52,13 @@ function removeTodo(id) {
     </p>
 
     <ul v-else class="todo-list">
-      <li v-for="todo in todos" :key="todo.id" :class="{ done: todo.done }">
-        <label>
-          <input
-            type="checkbox"
-            :checked="todo.done"
-            @change="toggleTodo(todo.id)"
-          />
-          <span> {{ todo.text }}</span>
-        </label>
-        <button type="button" @click="removeTodo(todo.id)">x</button>
-      </li>
+      <TodoItem
+        v-for="todo in todos"
+        :key="todo.id"
+        :todo="todo"
+        @toggle="toggleTodo"
+        @remove="removeTodo"
+      />
     </ul>
   </main>
   <footer class="app__footer">
