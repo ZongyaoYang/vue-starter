@@ -1,7 +1,28 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
+
+const todos = ref([
+  { id: 1, text: "Learn about ref and reactive state", done: true },
+  { id: 2, text: "Understand computed properties", done: false },
+]);
 </script>
 
 <template>
-  <HelloWorld />
+  <main class="app">
+    <h1>Vue 3 basics</h1>
+
+    <ul class="todo-list">
+      <li v-for="todo in todos" :key="todo.id">
+        {{ todo.text }}
+      </li>
+    </ul>
+  </main>
 </template>
+
+<style scoped>
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+</style>
