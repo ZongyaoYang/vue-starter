@@ -1,10 +1,14 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const todos = ref([
   { id: 1, text: "Learn about ref and reactive state", done: true },
   { id: 2, text: "Understand computed properties", done: false },
 ]);
+
+const remainingCount = computed(
+  () => todos.value.filter((todo) => !todo.done).length,
+);
 </script>
 
 <template>
@@ -17,6 +21,9 @@ const todos = ref([
       </li>
     </ul>
   </main>
+  <footer class="app__footer">
+    {{ remainingCount }} task{{ remainingCount > 1 ? "s" : "" }} remaining
+  </footer>
 </template>
 
 <style scoped>
