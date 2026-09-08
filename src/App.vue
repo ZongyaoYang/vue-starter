@@ -9,11 +9,31 @@ const todos = ref([
 const remainingCount = computed(
   () => todos.value.filter((todo) => !todo.done).length,
 );
+
+const newTodoText = ref("");
+let nextId = 3;
+
+function addTodo() {
+  const text = newTodoText.value.trim();
+  if (!text) return;
+
+  todos.value.push({ id: nextId++, text, done: false });
+  nextTodoText.value = "";
+}
 </script>
 
 <template>
   <main class="app">
     <h1>Vue 3 basics</h1>
+
+    <form class="add-form" @submit.prevent="addTodo">
+      <input
+        v-model="newTodoText"
+        type="text"
+        placeholder="What do you need to do?"
+      />
+      <button type="submit">Add</button>
+    </form>
 
     <ul class="todo-list">
       <li v-for="todo in todos" :key="todo.id">
