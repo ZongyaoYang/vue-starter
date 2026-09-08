@@ -20,6 +20,17 @@ function addTodo() {
   todos.value.push({ id: nextId++, text, done: false });
   nextTodoText.value = "";
 }
+
+function toggleTodo(id) {
+  const todo = todos.value.find((t) => t.id == id);
+  if (todo) {
+    todo.done = !todo.done;
+  }
+}
+
+function removeTodo(id) {
+  todos.value = todos.value.filter((t) => t.id !== id);
+}
 </script>
 
 <template>
@@ -35,9 +46,21 @@ function addTodo() {
       <button type="submit">Add</button>
     </form>
 
-    <ul class="todo-list">
-      <li v-for="todo in todos" :key="todo.id">
-        {{ todo.text }}
+    <p v-if="todos.length === 0" class="empty-state">
+      Nothing here yet - add your first task above
+    </p>
+
+    <ul v-else class="todo-list">
+      <li v-for="todo in todos" :key="todo.id" :class="{ done: todo.done }">
+        <label>
+          <input
+            type="checkbox"
+            :checked="todo.done"
+            @change="toggleTodo(todo.id)"
+          />
+          <span> {{ todo.text }}</span>
+        </label>
+        <button type="button" @click="removeTodo(todo.id)">x</button>
       </li>
     </ul>
   </main>
