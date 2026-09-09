@@ -19,7 +19,7 @@ function addTodo() {
   if (!text) return;
 
   todos.value.push({ id: nextId++, text, done: false });
-  nextTodoText.value = "";
+  newTodoText.value = "";
 }
 
 function toggleTodo(id) {
