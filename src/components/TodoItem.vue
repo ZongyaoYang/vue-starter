@@ -29,3 +29,20 @@ const emit = defineEmits(["toggle", "remove"]);
     </button>
   </li>
 </template>
+
+<style scoped>
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.todo-item--done {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+</style>
